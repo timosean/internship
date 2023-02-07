@@ -4,6 +4,7 @@ import { GrPrevious } from "react-icons/gr";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
+// 엔터 눌렀을 때 검색해주는 함수
 const Search = (keyword: string) => {
   if (typeof window !== "undefined") {
     const keywords = localStorage.getItem("recent-keywords");
