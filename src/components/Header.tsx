@@ -9,22 +9,19 @@ const Search = (keyword: string) => {
   if (typeof window !== "undefined") {
     const keywords = localStorage.getItem("recent-keywords");
     // 유효 기간 설정
-    let date = new Date();
+    const date = new Date();
     date.setSeconds(date.getSeconds() + 600);
 
     if (keywords) {
-      let date = new Date();
       const keywords_JSON = JSON.parse(keywords);
-      keywords_JSON[keyword] = date;
+      keywords_JSON[keyword] = new String(date);
       localStorage.setItem("recent-keywords", JSON.stringify(keywords_JSON));
     } else {
       localStorage.setItem(
         "recent-keywords",
-        JSON.stringify({ keyword: date })
+        JSON.stringify({ keyword: new String(date) })
       );
     }
-
-    console.log(localStorage.getItem("recent-keywords"));
   }
 };
 
@@ -61,7 +58,6 @@ const Header = () => {
         onChange={(e) => setKeyword(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            console.log(keyword);
             Search(keyword);
           }
         }}
