@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         NAILGRAY: "#969293",
         NAILPINK: "#FB786B",
+        INPUT_BG: "#F8F7F7",
       },
     },
   },
