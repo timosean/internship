@@ -28,8 +28,12 @@ const SearchPage: NextPage = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const recentKeywords = localStorage.getItem("recent-keywords");
-      if (recentKeywords) {
+      if (
+        recentKeywords &&
+        JSON.stringify(keywords) !== JSON.stringify(recentKeywords)
+      ) {
         const JSONKeywords = JSON.parse(recentKeywords);
+        setKeywords([]);
         for (const key in JSONKeywords) {
           setKeywords((prev) => prev.concat(key));
         }
