@@ -1,12 +1,14 @@
 import type { NextPage } from "next";
 import RecentKeywordTag from "@/components/RecentKeywordTag";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { recentKeywordState } from "@/recoil/atoms/recentKeywordState";
 
 const RecentKeywordTagContainer = ({ keywords }: { keywords: string[] }) => {
   return (
     <div className="mt-[10px] w-full">
       {keywords.map((keyword) => (
-        <RecentKeywordTag content={keyword} />
+        <RecentKeywordTag content={keyword} key={keyword} />
       ))}
     </div>
   );
@@ -21,7 +23,7 @@ const NoKeywordNotice = () => {
 };
 
 const SearchPage: NextPage = () => {
-  const [keywords, setKeywords] = useState<string[]>([]);
+  const [keywords, setKeywords] = useRecoilState(recentKeywordState);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
