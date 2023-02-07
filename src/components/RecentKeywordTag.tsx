@@ -1,6 +1,6 @@
 import { GrClose } from "react-icons/gr";
 
-const RecentTag = ({ content }: { content: string }) => {
+const RecentKeywordTag = ({ content }: { content: string }) => {
   return (
     <div className="w-fit px-[8px] py-[5px] flex items-center justify-center gap-x-[10px] rounded-[2px] border-[0.6px] border-NAILGRAY">
       <span className="text-NAILGRAY text-[11px] leading-[13px] tracking-[-0.02em]">
@@ -11,4 +11,4 @@ const RecentTag = ({ content }: { content: string }) => {
   );
 };
 
-export default RecentTag;
+export default RecentKeywordTag;
