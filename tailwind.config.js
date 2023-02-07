@@ -5,10 +5,11 @@ module.exports = {
     "./src/components/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
-    colors: {
-      NAILGRAY: "#969293",
-      NAILPINK: "#FB786B",
+    extend: {
+      colors: {
+        NAILGRAY: "#969293",
+        NAILPINK: "#FB786B",
+      },
     },
   },
   plugins: [],
