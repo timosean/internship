@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import RecentTag from "@/components/RecentTag";
 
 const Home: NextPage = () => {
   return (
