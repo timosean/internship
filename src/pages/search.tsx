@@ -16,8 +16,8 @@ const RecentKeywordTagContainer = ({ keywords }: { keywords: string[] }) => {
 
 const NoKeywordNotice = () => {
   return (
-    <div className="mt-[10px] w-full h-[110px] flex justify-center align-center">
-      <p>최근 검색한 키워드가 없습니다!</p>
+    <div className="mt-[10px] w-full h-[110px] flex justify-center items-center">
+      최근 검색한 키워드가 없습니다!
     </div>
   );
 };
@@ -44,7 +44,7 @@ const SearchPage: NextPage = () => {
   return (
     <div className="mt-6">
       <h1 className="font-bold text-base">최근 검색어</h1>
-      {keywords ? (
+      {keywords.length ? (
         <RecentKeywordTagContainer keywords={keywords} />
       ) : (
         <NoKeywordNotice />
