@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={inter.className}>
+    <main className={`${inter.className} px-[16px]`}>
       <Component {...pageProps} />
     </main>
   );
