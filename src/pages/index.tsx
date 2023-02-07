@@ -1,9 +1,10 @@
 import type { NextPage } from "next";
+import RecentTag from "@/components/RecentTag";
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-red-500">
-      <h1 className="text-blue-500 font-bold"> Hello </h1>
+    <div className="mt-28">
+      <p className="text-4xl font-bold"> Main Page </p>
     </div>
   );
 };
