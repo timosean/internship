@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      NAILGRAY: "#969293",
+      NAILPINK: "#FB786B",
+    },
   },
   plugins: [],
 };
