@@ -54,7 +54,7 @@ const Header = () => {
       <input
         placeholder="네일 키워드와 네일샵을 검색해보세요."
         value={keyword}
-        className={`placeholder-NAILGRAY bg-INPUT_BG w-[279px] rounded-[10px] px-[10px] h-[38px] focus:outline-none ${
+        className={`text-sm placeholder-NAILGRAY bg-INPUT_BG w-[279px] rounded-[10px] px-[10px] h-[38px] focus:outline-none ${
           isSearching ? "block" : "hidden"
         }`}
         onChange={(e) => setKeyword(e.target.value)}
