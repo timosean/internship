@@ -41,7 +41,7 @@ const SearchPage: NextPage = () => {
         }
         setKeywords((prev) => {
           const temp = Array.from(prev);
-          return temp.reverse();
+          return temp.reverse().slice(0, 30);
         });
       }
     }
