@@ -59,6 +59,7 @@ const Header = () => {
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             Search(keyword);
+            router.push(`searchResult/${keyword}`);
           }
         }}
       />
