@@ -1,6 +1,7 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { GrPrevious } from "react-icons/gr";
+import { IoIosCloseCircle } from "react-icons/io";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
@@ -35,7 +36,7 @@ const Header = () => {
 
   return (
     <header
-      className={`flex py-[6px] px-[16px] ${
+      className={`flex py-[6px] px-[16px] relative ${
         isSearching ? "justify-around" : "justify-between"
       } items-center h-[50px]`}
     >
@@ -64,6 +65,17 @@ const Header = () => {
           }
         }}
         onClick={() => router.push("/search")}
+      />
+      <IoIosCloseCircle
+        className={`absolute right-[70px] ${
+          keyword !== "" ? "block" : "hidden"
+        }`}
+        size={20}
+        fill={"#969293"}
+        onClick={() => {
+          setKeyword("");
+          router.push("/search");
+        }}
       />
       <BiSearchAlt2
         size={18}
