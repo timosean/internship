@@ -39,7 +39,7 @@ const SearchResult = () => {
     };
 
     getNailShopResult();
-  }, []);
+  }, [keyword]);
 
   return (
     <div className="w-full grid grid-cols-2">

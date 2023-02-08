@@ -46,7 +46,6 @@ const Header = () => {
         size={18}
         className={`${isSearching ? "block" : "hidden"}`}
         onClick={() => {
-          setIsSearching(false);
           setKeyword("");
           router.back();
         }}
@@ -61,7 +60,7 @@ const Header = () => {
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             Search(keyword);
-            router.push(`searchResult/${keyword}`);
+            router.push(`/searchResult/${keyword}`);
           }
         }}
       />
