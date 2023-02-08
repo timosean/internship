@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { searchingState } from "@/recoil/atoms/searchingState";
+import { searchInputState } from "@/recoil/atoms/searchInputState";
 
 // 엔터 눌렀을 때 검색해주는 함수
 const Search = (keyword: string) => {
@@ -29,7 +30,7 @@ const Search = (keyword: string) => {
 
 const Header = () => {
   const [isSearching, setIsSearching] = useRecoilState(searchingState);
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useRecoilState(searchInputState);
   const router = useRouter();
 
   return (
@@ -46,7 +47,6 @@ const Header = () => {
         size={18}
         className={`${isSearching ? "block" : "hidden"}`}
         onClick={() => {
-          setKeyword("");
           router.back();
         }}
       />
@@ -63,11 +63,13 @@ const Header = () => {
             router.push(`/searchResult/${keyword}`);
           }
         }}
+        onClick={() => router.push("/search")}
       />
       <BiSearchAlt2
         size={18}
         onClick={() => {
           setIsSearching(true);
+          setKeyword("");
           router.push("/search");
         }}
       />

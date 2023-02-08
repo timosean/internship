@@ -3,6 +3,7 @@ import axiosInstance from "@/utils/axiosInstance";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { searchingState } from "@/recoil/atoms/searchingState";
+import { searchInputState } from "@/recoil/atoms/searchInputState";
 import NailShopCard from "@/components/NailShopCard";
 import { likedShopListState } from "@/recoil/atoms/likedShopListState";
 
@@ -26,10 +27,12 @@ const SearchResult = () => {
 
   const [_, setIsSearching] = useRecoilState(searchingState);
   const [likedList, setLikedList] = useRecoilState(likedShopListState);
+  const [searchInput, setSearchInput] = useRecoilState(searchInputState);
   const [results, setResult] = useState<NailShop[]>([]);
 
   useEffect(() => {
     setIsSearching(true);
+    if (typeof keyword === "string") setSearchInput(keyword);
   }, []);
 
   useEffect(() => {
