@@ -39,6 +39,10 @@ const SearchPage: NextPage = () => {
           if (new Date(JSONKeywords[key]) >= now)
             setKeywords((prev) => prev.concat(key));
         }
+        setKeywords((prev) => {
+          const temp = Array.from(prev);
+          return temp.reverse();
+        });
       }
     }
   }, []);
