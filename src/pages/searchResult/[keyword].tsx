@@ -45,7 +45,7 @@ const SearchResult = () => {
   }, [keyword]);
 
   return (
-    <div className="w-full grid grid-cols-2">
+    <div className="w-full justify-items-center grid grid-cols-2">
       {results.map((elem, idx) => (
         <NailShopCard
           key={elem.shop.shop_id + idx}
