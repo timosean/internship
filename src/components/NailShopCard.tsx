@@ -9,7 +9,7 @@ interface NailShopCardInfo {
 
 const NailShopCard = ({ name, imgsrc, loc }: NailShopCardInfo) => {
   return (
-    <div className="w-[163.5px] flex flex-col">
+    <div className="w-[163.5px] mt-[10px] flex flex-col">
       <Image
         src={imgsrc}
         alt={name}
@@ -19,10 +19,10 @@ const NailShopCard = ({ name, imgsrc, loc }: NailShopCardInfo) => {
       />
       <div className="mt-[4px] w-full flex justify-between items-center">
         <div>
-          <h1 className="font-bold">{name}</h1>
-          <h2 className="text-NAILGRAY text-sm">{loc}</h2>
+          <h1 className="font-bold text-[13px] leading-[15.73px]">{name}</h1>
+          <h2 className="text-NAILGRAY text-[11px]">{loc}</h2>
         </div>
-        <FiHeart stroke={"NAILPINK"} />
+        <FiHeart size={22} className="text-NAILPINK" />
       </div>
     </div>
   );
