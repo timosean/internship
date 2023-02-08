@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import RecentKeywordTag from "@/components/RecentKeywordTag";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { recentKeywordState } from "@/recoil/atoms/recentKeywordState";
+import { searchingState } from "@/recoil/atoms/searchingState";
 
 const RecentKeywordTagContainer = ({ keywords }: { keywords: string[] }) => {
   return (
@@ -24,6 +25,11 @@ const NoKeywordNotice = () => {
 
 const SearchPage: NextPage = () => {
   const [keywords, setKeywords] = useRecoilState(recentKeywordState);
+  const [isSarching, setIsSearching] = useRecoilState(searchingState);
+
+  useEffect(() => {
+    setIsSearching(true);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

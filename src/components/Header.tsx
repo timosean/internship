@@ -3,6 +3,8 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import { GrPrevious } from "react-icons/gr";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { searchingState } from "@/recoil/atoms/searchingState";
 
 // 엔터 눌렀을 때 검색해주는 함수
 const Search = (keyword: string) => {
@@ -26,7 +28,7 @@ const Search = (keyword: string) => {
 };
 
 const Header = () => {
-  const [isSearching, setIsSearching] = useState(false);
+  const [isSearching, setIsSearching] = useRecoilState(searchingState);
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
 
