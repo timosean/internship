@@ -81,8 +81,10 @@ const SearchPage: NextPage = () => {
   }, []);
 
   return (
-    <div className="mt-6">
-      <h1 className="font-bold text-base">최근 검색어</h1>
+    <div className={`${searchInput ? "" : "mt-6"}`}>
+      <h1 className={`font-bold text-base ${searchInput ? "hidden" : "block"}`}>
+        최근 검색어
+      </h1>
       {/* {keywords.length ? (
         <RecentKeywordTagContainer keywords={keywords} />
       ) : (
