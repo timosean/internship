@@ -21,17 +21,20 @@ const Recommend = ({ type, name, imgsrc }: RecommendItem) => {
         }`}
       >
         {type === "shops" ? (
-          <Image
-            src={imgsrc}
-            width={35}
-            height={35}
-            alt={name}
-            className="rounded-full"
-          />
+          <div className="w-[35px] h-[35px] rounded-full">
+            <img
+              src={String(imgsrc)}
+              className="w-[35px] h-[35px] rounded-full"
+              alt={name}
+            />
+          </div>
         ) : (
-          <FaHashtag size={18} className="text-NAILGRAY" />
+          <FaHashtag size={20} className="text-NAILGRAY" />
         )}
         <span className="ml-[10px]">{removeHashtag(name)}</span>
+      </div>
+      <div className="text-sm text-NAILGRAY flex items-center">
+        {type === "shops" ? "네일샵" : "해시태그"}
       </div>
     </div>
   );
