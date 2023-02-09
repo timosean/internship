@@ -5,6 +5,29 @@ import { useRecoilState } from "recoil";
 import { recentKeywordState } from "@/recoil/atoms/recentKeywordState";
 import { searchingState } from "@/recoil/atoms/searchingState";
 import { searchInputState } from "@/recoil/atoms/searchInputState";
+import Recommend from "@/components/Recommend";
+import {
+  RecommendItem,
+  RecommendList,
+  recommendListState,
+} from "@/recoil/atoms/recommendListState";
+
+function RecommendContainer({ list }: { list: RecommendList }) {
+  return (
+    <>
+      {list.shops
+        .map((s: any) => (
+          <Recommend type="shops" name={s.keyword} imgsrc={s.thumb_image} />
+        ))
+        .slice(0, 3)}
+      {list.hashtags
+        .map((h: any) => (
+          <Recommend type="hashtags" name={h.keyword} imgsrc={h.thumb_image} />
+        ))
+        .slice(0, 3)}
+    </>
+  );
+}
 
 const RecentKeywordTagContainer = ({ keywords }: { keywords: string[] }) => {
   return (
@@ -28,6 +51,7 @@ const SearchPage: NextPage = () => {
   const [keywords, setKeywords] = useRecoilState(recentKeywordState);
   const [isSarching, setIsSearching] = useRecoilState(searchingState);
   const [searchInput, setSearchInput] = useRecoilState(searchInputState);
+  const [recommendList, setRecommendList] = useRecoilState(recommendListState);
 
   useEffect(() => {
     setIsSearching(true);
@@ -59,7 +83,14 @@ const SearchPage: NextPage = () => {
   return (
     <div className="mt-6">
       <h1 className="font-bold text-base">최근 검색어</h1>
-      {keywords.length ? (
+      {/* {keywords.length ? (
+        <RecentKeywordTagContainer keywords={keywords} />
+      ) : (
+        <NoKeywordNotice />
+      )} */}
+      {searchInput ? (
+        <RecommendContainer list={recommendList} />
+      ) : keywords.length ? (
         <RecentKeywordTagContainer keywords={keywords} />
       ) : (
         <NoKeywordNotice />

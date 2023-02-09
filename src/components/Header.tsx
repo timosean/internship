@@ -2,11 +2,13 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { GrPrevious } from "react-icons/gr";
 import { IoIosCloseCircle } from "react-icons/io";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { searchingState } from "@/recoil/atoms/searchingState";
 import { searchInputState } from "@/recoil/atoms/searchInputState";
+import { recommendListState } from "@/recoil/atoms/recommendListState";
+import { useEffect, useState } from "react";
+import axiosInstance from "@/utils/axiosInstance";
 
 // 엔터 눌렀을 때 검색해주는 함수
 const Search = (keyword: string) => {
@@ -32,7 +34,35 @@ const Search = (keyword: string) => {
 const Header = () => {
   const [isSearching, setIsSearching] = useRecoilState(searchingState);
   const [keyword, setKeyword] = useRecoilState(searchInputState);
+  const [recommendList, setRecommendList] = useRecoilState(recommendListState);
   const router = useRouter();
+
+  const useDebounce = (value: string, delay: number) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }, [value, delay]);
+
+    return debouncedValue;
+  };
+
+  const debouncedQuery = useDebounce(keyword, 500);
+
+  useEffect(() => {
+    async function fetchRecommend() {
+      const res = await axiosInstance.get(`?input=${debouncedQuery}`);
+      setRecommendList(res.data);
+    }
+
+    if (debouncedQuery) fetchRecommend();
+  }, [debouncedQuery]);
 
   return (
     <header
@@ -57,7 +87,9 @@ const Header = () => {
         className={`text-sm placeholder-NAILGRAY bg-INPUT_BG w-[279px] rounded-[10px] px-[10px] h-[38px] focus:outline-none ${
           isSearching ? "block" : "hidden"
         }`}
-        onChange={(e) => setKeyword(e.target.value)}
+        onChange={(e) => {
+          setKeyword(e.target.value);
+        }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             Search(keyword);
@@ -68,7 +100,7 @@ const Header = () => {
       />
       <IoIosCloseCircle
         className={`absolute right-[70px] ${
-          keyword !== "" ? "block" : "hidden"
+          keyword !== "" && isSearching ? "block" : "hidden"
         }`}
         size={20}
         fill={"#969293"}

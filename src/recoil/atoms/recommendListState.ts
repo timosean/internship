@@ -1,19 +1,19 @@
 import { atom } from "recoil";
 
-interface RecommendItem {
+export interface RecommendItem {
   shop_id: string | null;
   keyword: string;
   thumb_image: string | null;
 }
 
-interface RecommendList {
+export interface RecommendList {
   shops: RecommendItem[];
   hashtags: RecommendItem[];
 }
 
-const defaultValue = {
-  shops: Array<RecommendItem>(),
-  hashtags: Array<RecommendItem>(),
+const defaultValue: RecommendList = {
+  shops: Array<RecommendItem>(0),
+  hashtags: Array<RecommendItem>(0),
 };
 
 export const recommendListState = atom<RecommendList>({
