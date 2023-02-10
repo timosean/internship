@@ -1,5 +1,7 @@
 import { FaHashtag } from "react-icons/fa";
 import Image from "next/image";
+import { useRecoilState } from "recoil";
+import { searchInputState } from "@/recoil/atoms/searchInputState";
 
 interface RecommendItem {
   type: string;
@@ -7,33 +9,17 @@ interface RecommendItem {
   imgsrc: string | null;
 }
 
-const MarkedText = ({ text: string }) => {
-  return <span className="text-NAILPINK font-bold">text</span>;
+const MarkedText = ({ text }: { text: string }) => {
+  return <span className="text-NAILPINK font-bold">{text}</span>;
 };
 
-const matchedText = (text: string, keyword: string) => {
-  //키워드가 빈 값이 아니거나, text가 키워드를 포함하고 있다면(조건)
-  if (keyword !== "" && text.includes(keyword)) {
-    //키워드를 기준으로 text를 쪼갠다.
-    const parts = text.split(new RegExp(`(${keyword})`, "gi"));
+const getHighlight = (name: string, find: string) => {
+  const splitResult = name.split(find);
+  console.log(splitResult);
 
-    return (
-      <>
-        // 문자열이 담긴 배열을 map 돌림
-        {parts.map((part, index) =>
-          //소문자로 변환 후 비교하여 일치하면 MarkedText 스타일 적용
-          part.toLowerCase() === keyword.toLowerCase() ? (
-            <MarkedText key={index} text={part} />
-          ) : (
-            //일치하지않으면 그대로 출력
-            part
-          )
-        )}
-      </>
-    );
-  }
-
-  return text;
+  return splitResult.map((word, idx) => {
+    return word === "" ? <MarkedText text={find} /> : <span>{word}</span>;
+  });
 };
 
 const removeHashtag = (word: string) => {
@@ -42,6 +28,8 @@ const removeHashtag = (word: string) => {
 };
 
 const Recommend = ({ type, name, imgsrc }: RecommendItem) => {
+  const [searchInput, setSearchInput] = useRecoilState(searchInputState);
+
   return (
     <div className="w-full h-[51px] py-[8px] flex justify-between">
       <div
@@ -60,7 +48,9 @@ const Recommend = ({ type, name, imgsrc }: RecommendItem) => {
         ) : (
           <FaHashtag size={20} className="text-NAILGRAY" />
         )}
-        <span className="ml-[10px] font-bold">{removeHashtag(name)}</span>
+        <span className="ml-[10px] font-bold">
+          {getHighlight(removeHashtag(name), searchInput)}
+        </span>
       </div>
       <div className="text-sm text-NAILGRAY flex items-center">
         {type === "shops" ? "네일샵" : "해시태그"}
